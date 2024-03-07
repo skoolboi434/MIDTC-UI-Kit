@@ -1,0 +1,19 @@
+// Variables, fonts, mixins, helpers... common styles used across project
+@import 'base/__base';
+
+// Components
+@import 'components/__components';
+
+.element-container {
+  background-color: $offwhite;
+  min-height: 300px;
+  padding: 20px 0;
+
+  &.alt {
+    background-color: $white;
+  }
+}
+
+.heading {
+  font-weight: 400;
+}
