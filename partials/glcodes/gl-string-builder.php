@@ -1,4 +1,4 @@
-<section class="element-container">
+<section class="element-container mb-5">
   <div class="container">
     <h3 class="heading mb-5">GL Code String Builder</h3>
 
@@ -24,8 +24,8 @@
       <div id="div2" class="selected-codes mb-5" ondrop="drop(event)"
         ondragover="allowDrop(event)">
 
-        <button class="btn-custom btn-secondary-light" draggable="false"
-          id="GL">GL</button>
+        <button class="btn-custom btn-secondary-light" ondragstart="drag(event)"
+          draggable="true" id="GL">GL</button>
       </div>
 
       <div class="selected-fields-container">

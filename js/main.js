@@ -40,20 +40,26 @@ function drop(ev) {
 
   // Check if the dropped element is a button
   if (draggedElement.tagName === 'BUTTON') {
-    // Move the button to the drop zone
-    dropZone.appendChild(draggedElement);
+    // If the dropped button is GL, rearrange buttons and update input fields
+    if (draggedElement.id === 'GL') {
+      // Move the button to the drop zone
+      dropZone.appendChild(draggedElement);
 
-    // Update the buttonsInDiv2 array to reflect the new order of buttons
-    buttonsInDiv2 = Array.from(dropZone.querySelectorAll('button')).map(function (button) {
-      return button.id;
-    });
+      // Update the buttonsInDiv2 array to reflect the new order of buttons
+      buttonsInDiv2 = Array.from(dropZone.querySelectorAll('button')).map(function (button) {
+        return button.id;
+      });
 
-    // Update input fields based on buttonsInDiv2 array
-    var inputContainer = document.getElementById('inputContainer');
-    inputContainer.innerHTML = ''; // Clear existing input fields
-    buttonsInDiv2.forEach(function (buttonId) {
-      inputContainer.appendChild(createInputField(buttonId));
-    });
+      // Update input fields based on buttonsInDiv2 array
+      var inputContainer = document.getElementById('inputContainer');
+      inputContainer.innerHTML = ''; // Clear existing input fields
+      buttonsInDiv2.forEach(function (buttonId) {
+        inputContainer.appendChild(createInputField(buttonId));
+      });
+    } else {
+      // Move the button to the drop zone without rearranging buttons
+      dropZone.appendChild(draggedElement);
+    }
   }
 }
 

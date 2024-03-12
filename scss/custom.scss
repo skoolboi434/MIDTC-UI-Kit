@@ -17,3 +17,10 @@
 .heading {
   font-weight: 400;
 }
+
+.top-bar {
+  background-color: $secondary;
+  width: 100%;
+  min-height: 50px;
+  position: fixed;
+}

@@ -17,3 +17,4 @@
 </head>
 
 <body>
+  <div class="top-bar"></div>

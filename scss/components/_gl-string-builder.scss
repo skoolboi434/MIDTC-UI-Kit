@@ -37,6 +37,12 @@
   .btn-custom {
     position: relative;
 
+    &#GL {
+      &:after {
+        content: '';
+        display: none;
+      }
+    }
     &:after {
       content: '\002B';
       position: absolute;
@@ -69,6 +75,11 @@
   .active-fields {
     label {
       text-transform: capitalize;
+    }
+
+    input {
+      border: 1px solid $black;
+      box-shadow: $shadow;
     }
   }
 }
