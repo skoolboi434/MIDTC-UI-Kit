@@ -65,4 +65,10 @@
       }
     }
   }
+
+  .active-fields {
+    label {
+      text-transform: capitalize;
+    }
+  }
 }

@@ -270,6 +270,9 @@
   font-weight: 700;
   line-height: 14.4px;
 }
+.gl-code-builder .active-fields label {
+  text-transform: capitalize;
+}
 
 .element-container {
   background-color: #f3f3f3;

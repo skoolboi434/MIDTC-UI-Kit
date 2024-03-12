@@ -1,14 +1,28 @@
 var buttonsInDiv2 = [];
 
-// Disable all input fields by default except for the GL input
-window.onload = function () {
-  var activeFields = document.querySelectorAll('.active-fields input');
-  activeFields.forEach(function (input) {
-    if (input.id !== 'GL') {
-      input.disabled = true;
-    }
-  });
-};
+// Function to create input fields
+function createInputField(buttonId) {
+  var colDiv = document.createElement('div');
+  colDiv.className = 'col-2';
+
+  var label = document.createElement('label');
+  label.textContent = buttonId.replace('drag', '');
+  label.setAttribute('for', buttonId);
+
+  var input = document.createElement('input');
+  input.type = 'text';
+  input.className = 'form-control';
+  input.name = buttonId.replace('drag', ''); // Use buttonId to name inputs
+  input.id = buttonId.replace('drag', ''); // Use buttonId as input id
+
+  // Determine initial disabled state based on the location of the button
+  input.disabled = !buttonsInDiv2.includes(buttonId);
+
+  colDiv.appendChild(label);
+  colDiv.appendChild(input);
+
+  return colDiv;
+}
 
 function allowDrop(ev) {
   ev.preventDefault();
@@ -29,24 +43,16 @@ function drop(ev) {
     // Move the button to the drop zone
     dropZone.appendChild(draggedElement);
 
-    // Add or remove button ID from buttonsInDiv2 array
-    var buttonId = draggedElement.id;
-    if (dropZone.id === 'div2') {
-      if (!buttonsInDiv2.includes(buttonId)) {
-        buttonsInDiv2.push(buttonId);
-      }
-    } else {
-      buttonsInDiv2 = buttonsInDiv2.filter(function (id) {
-        return id !== buttonId;
-      });
-    }
+    // Update the buttonsInDiv2 array to reflect the new order of buttons
+    buttonsInDiv2 = Array.from(dropZone.querySelectorAll('button')).map(function (button) {
+      return button.id;
+    });
 
-    // Enable or disable input fields based on buttonsInDiv2 array
-    var activeFields = document.querySelectorAll('.active-fields input');
-    activeFields.forEach(function (input) {
-      if (input.id !== 'GL') {
-        input.disabled = buttonsInDiv2.includes(input.id) ? false : true;
-      }
+    // Update input fields based on buttonsInDiv2 array
+    var inputContainer = document.getElementById('inputContainer');
+    inputContainer.innerHTML = ''; // Clear existing input fields
+    buttonsInDiv2.forEach(function (buttonId) {
+      inputContainer.appendChild(createInputField(buttonId));
     });
   }
 }
@@ -56,18 +62,17 @@ var div2Observer = new MutationObserver(function (mutations) {
   mutations.forEach(function (mutation) {
     mutation.removedNodes.forEach(function (node) {
       if (node.tagName === 'BUTTON') {
-        var removedButtonId = node.id;
-
-        // Remove the removed button ID from buttonsInDiv2 array
-        buttonsInDiv2 = buttonsInDiv2.filter(function (id) {
-          return id !== removedButtonId;
+        // Update the buttonsInDiv2 array to reflect the new order of buttons
+        buttonsInDiv2 = Array.from(document.getElementById('div2').querySelectorAll('button')).map(function (button) {
+          return button.id;
         });
 
-        // Disable the corresponding input field
-        var input = document.getElementById(removedButtonId);
-        if (input) {
-          input.disabled = true;
-        }
+        // Update input fields based on buttonsInDiv2 array
+        var inputContainer = document.getElementById('inputContainer');
+        inputContainer.innerHTML = ''; // Clear existing input fields
+        buttonsInDiv2.forEach(function (buttonId) {
+          inputContainer.appendChild(createInputField(buttonId));
+        });
       }
     });
   });
@@ -81,10 +86,8 @@ var div1Observer = new MutationObserver(function (mutations) {
   mutations.forEach(function (mutation) {
     mutation.addedNodes.forEach(function (node) {
       if (node.tagName === 'BUTTON') {
-        var addedButtonId = node.id;
-
         // Disable the corresponding input field
-        var input = document.getElementById(addedButtonId);
+        var input = document.getElementById(node.id.replace('drag', ''));
         if (input) {
           input.disabled = true;
         }

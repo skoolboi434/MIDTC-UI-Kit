@@ -25,7 +25,7 @@
         ondragover="allowDrop(event)">
 
         <button class="btn-custom btn-secondary-light" draggable="false"
-          id="drag1">GL</button>
+          id="GL">GL</button>
       </div>
 
       <div class="selected-fields-container">
@@ -36,30 +36,10 @@
 
         <div class="active-fields">
           <div class="form-group">
-            <div class="row justify-content-md-center">
+            <div id="inputContainer" class="row justify-content-md-center">
               <div class="col-2">
-                <label for="">GL</label>
-                <input type="text" class="form-control" name="" id="GL">
-              </div>
-              <div class="col-2">
-                <label for="">Location</label>
-                <input type="text" class="form-control" name="location"
-                  id="location">
-              </div>
-              <div class="col-2">
-                <label for="">Departments</label>
-                <input type="text" class="form-control" name="departments"
-                  id="departments">
-              </div>
-              <div class="col-2">
-                <label for="">Company</label>
-                <input type="text" class="form-control" name="company"
-                  id="company">
-              </div>
-              <div class="col-2">
-                <label for="">Profit</label>
-                <input type="text" class="form-control" name="profit"
-                  id="profit">
+                <label for="GL">GL</label>
+                <input type="text" class="form-control" name="GL" id="GL">
               </div>
             </div>
           </div>
