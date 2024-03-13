@@ -38,27 +38,39 @@ function drop(ev) {
   var draggedElement = document.getElementById(data);
   var dropZone = ev.target;
 
-  // Check if the dropped element is a button
-  if (draggedElement.tagName === 'BUTTON') {
-    // If the dropped button is GL, rearrange buttons and update input fields
-    if (draggedElement.id === 'GL') {
-      // Move the button to the drop zone
-      dropZone.appendChild(draggedElement);
+  // Check if the dropped element is a button and if the dropZone is "div2"
+  if (draggedElement.tagName === 'BUTTON' && dropZone.id === 'div2') {
+    // Move the button to the drop zone
+    dropZone.appendChild(draggedElement);
 
-      // Update the buttonsInDiv2 array to reflect the new order of buttons
-      buttonsInDiv2 = Array.from(dropZone.querySelectorAll('button')).map(function (button) {
-        return button.id;
-      });
+    // Update the buttonsInDiv2 array to reflect the new order of buttons
+    buttonsInDiv2 = Array.from(dropZone.querySelectorAll('button')).map(function (button) {
+      return button.id;
+    });
 
-      // Update input fields based on buttonsInDiv2 array
-      var inputContainer = document.getElementById('inputContainer');
-      inputContainer.innerHTML = ''; // Clear existing input fields
-      buttonsInDiv2.forEach(function (buttonId) {
-        inputContainer.appendChild(createInputField(buttonId));
-      });
-    } else {
-      // Move the button to the drop zone without rearranging buttons
-      dropZone.appendChild(draggedElement);
+    // Update input fields based on buttonsInDiv2 array
+    var inputContainer = document.getElementById('inputContainer');
+    inputContainer.innerHTML = ''; // Clear existing input fields
+    buttonsInDiv2.forEach(function (buttonId) {
+      inputContainer.appendChild(createInputField(buttonId));
+    });
+
+    // Enable the corresponding input field
+    var input = document.getElementById(draggedElement.id.replace('drag', ''));
+    if (input) {
+      input.disabled = false;
+    }
+  }
+
+  // Check if the dropZone is "div1"
+  if (dropZone.id === 'div1') {
+    // Move the button back to the drop zone
+    dropZone.appendChild(draggedElement);
+
+    // Disable the corresponding input field
+    var input = document.getElementById(draggedElement.id.replace('drag', ''));
+    if (input) {
+      input.disabled = true;
     }
   }
 }

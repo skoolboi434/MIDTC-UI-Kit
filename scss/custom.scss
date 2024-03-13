@@ -7,7 +7,7 @@
 .element-container {
   background-color: $offwhite;
   min-height: 300px;
-  padding: 20px 0;
+  padding: 20px;
 
   &.alt {
     background-color: $white;
@@ -23,4 +23,14 @@
   width: 100%;
   min-height: 50px;
   position: fixed;
+}
+
+.wrapper {
+  display: flex;
+  position: relative;
+
+  .main-content {
+    width: 100%;
+    margin-left: 200px;
+  }
 }
